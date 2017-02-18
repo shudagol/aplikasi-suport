@@ -135,6 +135,42 @@ class Issue extends CI_Controller {
       }
      
     }
+
+    public function edit_comment($id)
+    {
+      $data['data'] = $this->M_comment->edit_comment($id);
+      $this->load->view('issue/edit_comment',$data);
+    }
+
+    public function update_comment()
+    {
+        $input = $this->input->post();
+       echo "<pre>";
+       print_r ($input);
+       echo "</pre>";
+        $proses = $this->M_comment->update_comment($input);
+
+        if ($proses>= 0) {
+          $this->session->set_flashdata('alert_msg',succ_msg('comment Berhasil di Update'));
+          // redirect('pegawai');
+        }else{
+          $this->session->set_flashdata('alert_msg',err_msg('comment gagal di Update'));
+          // redirect('pegawai');
+      }
+    }
+
+    public function hapus_comment($id)
+    {
+      $proses = $this->M_comment->act_hapus($id);
+      if ($proses>= 0) {
+        $this->session->set_flashdata('alert_msg',succ_msg('Komentar Berhasil di Hapus'));
+      // redirect('pegawai');
+      }else{
+        $this->session->set_flashdata('alert_msg',err_msg('Komentar gagal di Hapus'));
+      // redirect('pegawai');
+
+      }
+    }
 }
 
 /* End of file Admin.php */

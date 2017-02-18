@@ -74,7 +74,7 @@
     <div class="col-md-10">
     	 <hr>
     	 <?php if ($comment != 0) {
-    	 	foreach ($comment as $key => $value) { ?>
+    	 	foreach ($comment as $key => $value) {?>
     	 		
     	 
     	 <!-- Second Comment Reply -->
@@ -97,12 +97,36 @@
                   <div class="comment-post">
                     <?= $value->isi ?>
                   </div>
-                  <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+                  <?php if ($value->user_id == $this->session->userdata('user_id')) {?>
+                  <p class="text-right"><button class="btn btn-edit btn-info btn-xs" data-id="<?= $value->comment_id; ?>" title="edit"><span class='glyphicon glyphicon-pencil'></span></button>
+                 <button class="btn btn-delete btn-danger btn-xs" title="hapus" data-title="Delete" data-toggle="modal" data-target="#delete"><span class='glyphicon glyphicon-trash'></span></button></p>
+                 <?php } ?>
                 </div>
               </div>
             </div>
           </article>
 		<hr>
+
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title custom_align" id="Heading">Hapus Comment</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Apakah anda yakin menghapus komentar anda?</div>
+
+      </div>
+      <div class="modal-footer ">
+        <button id="btn-delete" data-id="<?php echo $value->comment_id ?>" type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+      </div>
+    </div>
+    <!-- /.modal-content --> 
+  </div>
+</div>
           	<?php }
     	 } ?>
 
@@ -152,6 +176,10 @@
   </div>
 </div> 
 
+<div id="m-update"></div>
+
+
+
 
 <script type="text/javascript">
    var roxyFileman = '<?= base_url('assets') ?>/ckeditor/plugins/fileman/index.html';
@@ -182,6 +210,56 @@
 
     e.preventDefault();
         
+   
+});
+
+  $(document).on("click", ".btn-edit", function() {
+    console.log('btn edit');
+    var id = $(this).attr('data-id');
+    console.log(id);
+    $.get("<?php echo base_url(); ?>issue/edit_comment/"+id, function(msg){
+        // alert(msg);
+
+        $('#m-update').html(msg);
+        $('#modalcomment').modal('show');
+        
+    });
+});
+
+  $(document).on("submit", "#form_comment", function(e) {
+
+    var input = $(this).serialize();
+
+    $.ajax({
+        method : 'POST',
+        url: '<?php echo base_url('issue/update_comment') ?>',
+        data: input
+    })
+    .done(function(msg) {
+        $('.myAlert').show();
+        $('.myAlert').html('<div class="alert alert-success" role="alert">Berhasil</div>').delay( 5000 ).fadeOut( 400 );
+        $('#editData').modal('hide');
+        window.location.reload();
+        console.log(msg);
+
+
+    })
+    console.log('tes');
+    e.preventDefault();
+
+});
+
+  $(document).on("click", "#btn-delete", function(e) {
+   
+        var id = $(this).attr('data-id');
+        $.get("<?php echo base_url(); ?>issue/hapus_comment/"+id, function(){
+          $('.myAlert').show();
+        $('.myAlert').html('<div class="alert alert-success" role="alert">Data Berhasil di hapus</div>').delay( 5000 ).fadeOut( 400 );
+               $('#delete').modal('hide');
+        window.location.reload();
+
+        });
+        e.preventDefault();
    
 });
 
