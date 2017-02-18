@@ -12,7 +12,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
-            <li><a href="/issue">Issue</a></li>
+            <li><a href="<?= base_url('issue') ?>">Issue</a></li>
             <li><a href="#/contact">Aktifitas</a></li>
             <?php if ($this->session->userdata('level') == 'admin') {?>
             <li class="dropdown">
