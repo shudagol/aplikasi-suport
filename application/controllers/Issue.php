@@ -13,8 +13,6 @@ class Issue extends CI_Controller {
 
         $this->load->library('pagination');
         $this->load->helper('tgl_indonesia');
-
-
 	}
 
 	// public function index()
@@ -86,7 +84,9 @@ class Issue extends CI_Controller {
 }
 
 	public function create_issue(){
-		 $this->template->lihat('issue/create');
+     $data['data'] = $this->M_issue->get_kategori();
+
+		 $this->template->lihat('issue/create',$data);
 	}
 
 	public function insert(){

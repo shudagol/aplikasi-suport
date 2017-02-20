@@ -15,11 +15,18 @@ class M_issue extends CI_Model {
 		// return $data->result();
 	}
 
+  public function get_kategori()
+  {
+    $data = $this->db->get('kategori'); 
+    return $data->result();
+  }
+
 	function lihat($sampai,$dari){
 
     $this->db->order_by("created_at", "desc");
-    $this->db->select('issue.*, user.username');
+    $this->db->select('issue.*, user.username, kategori.judul_kategori');
     $this->db->join('user', 'user.id = issue.user_id', 'left');
+    $this->db->join('kategori', 'kategori.id_kategori = issue.id_kategori', 'left');
     $data = $this->db->get('issue',$sampai,$dari);
     return $data->result();
    
@@ -31,10 +38,11 @@ class M_issue extends CI_Model {
   }
 
    function caridata(){
-	$c = $this->input->POST ('key');
-	$this->db->like('judul', $c);
-	$this->db->order_by("created_at", "desc");
-    $this->db->select('issue.*, user.username');
+	  $c = $this->input->POST ('key');
+	  $this->db->like('judul', $c);
+	  $this->db->order_by("created_at", "desc");
+    $this->db->select('issue.*, user.username, kategori.judul_kategori');
+    $this->db->join('kategori', 'kategori.id_kategori = issue.id_kategori', 'left');
     $this->db->join('user', 'user.id = issue.user_id', 'left');
     $query = $this->db->get('issue');
 	return $query->result(); 
@@ -48,15 +56,18 @@ class M_issue extends CI_Model {
   		$param['created_at'] = date("Y-m-d H:i:s");
   		$param['tgl'] = date("Y-m-d");
       $param['status']= 'open';
+      $param['id_kategori'] = $input['kategori'];
+
 		$this->db->insert('issue', $param);
 
 		return $this->db->affected_rows();
 	}
 
   public function detail($id){
-    $this->db->select('issue.*, user.username,user.nama');
+    $this->db->select('issue.*, user.username,user.nama, kategori.judul_kategori');
     $this->db->where('issue_id', $id);
     $this->db->join('user', 'user.id = issue.user_id', 'left');
+    $this->db->join('kategori', 'kategori.id_kategori = issue.id_kategori', 'left');
     $data = $this->db->get('issue');
     return $data->result();
   }

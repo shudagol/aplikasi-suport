@@ -1,10 +1,25 @@
+
+
 <div class="col-md-10">
 <form class="form-horizontal" action="<?= base_url('issue/insert') ?>" method="POST">
  
     <div class="form-group">
       <label for="judul" class="col-lg-2 control-label">Judul</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="judul" name="judul" placeholder="judul">
+        <input type="text" class="form-control" id="judul" name="judul" placeholder="masukan judul">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="judul" class="col-lg-2 control-label">Kategori</label>
+      <div class="col-lg-6">
+        <select type="text" class="form-control" id="kategori" name="kategori" placeholder="kategori">
+          <option hidden  default selected value=""><p style="color:red">-- pilih kategori --</p></option>
+          <?php foreach ($data as $key => $value) { ?>
+            <option value="<?= $value->id_kategori ?>"><?= $value->judul_kategori ?></option>
+              
+          <?php } ?>
+        </select>
       </div>
     </div>
     

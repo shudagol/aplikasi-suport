@@ -8,13 +8,14 @@
 <?php 
 	$issue_id   = $data[0]->issue_id;
 	$judul      = $data[0]->judul;
-	$isi 	    = $data[0]->isi;
+	$isi 	      = $data[0]->isi;
 	$status     = $data[0]->status;
 	$username   = $data[0]->username;
-	$tgl 	    = $data[0]->tgl;
-	$time 		= $data[0]->created_at;
+	$tgl 	      = $data[0]->tgl;
+	$time 		  = $data[0]->created_at;
 	$status   	= $data[0]->status;
-	$nama 		= $data[0]->nama;
+	$nama 		  = $data[0]->nama;
+  $kategori   = $data[0]->judul_kategori;
 
 	if ($status=='solved') {
 		$label = "<span class='label label-success'>Solved</span>";
@@ -31,7 +32,7 @@
 <div>
 	<h3> <i class="glyphicon glyphicon-align-right"></i> <?= $judul ?></h3><?= $label ?>
 	<?php 
-		 echo "<span style='font-size:14px'>".waktu_lalu($time)." | ".nama_hari($tgl).' '. tgl_indo($tgl)."  | by <span style='color:#2525B8;'><b>".$username."</b></span></span> ";
+		 echo "<span style='font-size:14px'>".waktu_lalu($time)." | ".nama_hari($tgl).' '. tgl_indo($tgl)."| kategori : ".$kategori."  | by <span style='color:#2525B8;'><b>".$username."</b></span></span> ";
 	     echo "<br>";
 	?>
 	<hr>
@@ -99,36 +100,37 @@
                   </div>
                   <?php if ($value->user_id == $this->session->userdata('user_id')) {?>
                   <p class="text-right"><button class="btn btn-edit btn-info btn-xs" data-id="<?= $value->comment_id; ?>" title="edit"><span class='glyphicon glyphicon-pencil'></span></button>
-                 <button class="btn btn-delete btn-danger btn-xs" title="hapus" data-title="Delete" data-toggle="modal" data-target="#delete"><span class='glyphicon glyphicon-trash'></span></button></p>
+                 <button class="btn btn-delete btn-danger btn-xs" data-id="<?php echo $value->comment_id ?>" title="hapus" data-title="Delete" data-toggle="modal" ><span class='glyphicon glyphicon-trash'></span></button></p>
                  <?php } ?>
                 </div>
               </div>
             </div>
           </article>
 		<hr>
+        <?php }
+       } ?>
 
     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title custom_align" id="Heading">Hapus Comment</h4>
-      </div>
-      <div class="modal-body">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title custom_align" id="Heading">Hapus Comment</h4>
+          </div>
+          <div class="modal-body">
 
-        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Apakah anda yakin menghapus komentar anda?</div>
+            <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Apakah anda yakin menghapus komentar anda?</div>
 
-      </div>
-      <div class="modal-footer ">
-        <button id="btn-delete" data-id="<?php echo $value->comment_id ?>" type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+          </div>
+          <div class="modal-footer ">
+            <button id="btn-delete"  type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+          </div>
+        </div>
+        <!-- /.modal-content --> 
       </div>
     </div>
-    <!-- /.modal-content --> 
-  </div>
-</div>
-          	<?php }
-    	 } ?>
+        
 
       
     	 <form class="form-horizontal" action="<?= base_url('issue/insert_comment') ?>" method="POST">
@@ -249,18 +251,19 @@
 
 });
 
-  $(document).on("click", "#btn-delete", function(e) {
-   
-        var id = $(this).attr('data-id');
+$(document).on("click", ".btn-delete", function(e) {
+    // var tes = confirm('Are you sure you want to delete this item?');
+    var id = $(this).attr('data-id');
+      console.log(id);
+    tes = $("#delete").modal('show').on("click","#btn-delete",function(e){
+ 
         $.get("<?php echo base_url(); ?>issue/hapus_comment/"+id, function(){
-          $('.myAlert').show();
-        $('.myAlert').html('<div class="alert alert-success" role="alert">Data Berhasil di hapus</div>').delay( 5000 ).fadeOut( 400 );
-               $('#delete').modal('hide');
-        window.location.reload();
-
+            $('#delete').modal('hide');
+            window.location.reload();  
         });
         e.preventDefault();
-   
+    });
+        e.preventDefault();
 });
 
 </script>

@@ -62,7 +62,7 @@
 								"<label class='".$warna."' >".ucfirst($value->judul)."</label><br>"
 							; ?>
 							<?php 
-								 echo "<span style='font-size:12px'>".waktu_lalu($time)." | ".nama_hari($tgl).' '. tgl_indo($tgl)."  | by <span style='color:#2525B8;'><b>".$value->username."</b></span></span> ";
+								 echo "<span style='font-size:12px'>".waktu_lalu($time)." | ".nama_hari($tgl).' '. tgl_indo($tgl)."| kategori : ".$value->judul_kategori." | by <span style='color:#2525B8;'><b>".$value->username."</b></span></span> ";
 						         echo "<br>";
 							 ?>
 				</td>

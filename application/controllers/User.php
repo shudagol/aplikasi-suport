@@ -6,8 +6,8 @@ class User extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('username')=="") {
-			redirect('login');
+		if ($this->session->userdata('level')!="admin") {
+			redirect('admin');
 		}
         $this->load->model('M_user');
 
@@ -45,11 +45,8 @@ class User extends CI_Controller {
 		$proses = $this->M_user->act_edit($input);
 		if ($proses>= 0) {
 			$this->session->set_flashdata('alert_msg',succ_msg('User Berhasil di Update'));
-			// redirect('pegawai');
 		}else{
 			$this->session->set_flashdata('alert_msg',err_msg('User gagal di Update'));
-			// redirect('pegawai');
-
 		}
 	}
 
@@ -59,11 +56,8 @@ class User extends CI_Controller {
 		$proses = $this->M_user->act_hapus($id);
 		if ($proses>= 0) {
 			$this->session->set_flashdata('alert_msg',succ_msg('User Berhasil di Hapus'));
-			// redirect('pegawai');
 		}else{
 			$this->session->set_flashdata('alert_msg',err_msg('User gagal di Hapus'));
-			// redirect('pegawai');
-
 		}
 	}
 

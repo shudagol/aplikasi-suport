@@ -20,6 +20,8 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		// $this->load->view('welcome_message');
+		$content = file_get_contents('http://loripsum.net/api/10/short/headers');
+		echo $content;
 	}
 }

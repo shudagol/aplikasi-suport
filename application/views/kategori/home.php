@@ -2,10 +2,10 @@
   <?php echo  $this->session->flashdata('alert_msg'); ?>
 </div>
 <div class="col-md-6">
-<h3>Data User</h3>
+<h3>Data Kategori</h3>
 </div>
 <div class="col-md-6">
-<button data-title="Delete" data-toggle="modal" data-target="#tambahData" class="btn btn-primary btn-sm pull-right center" style="margin-top: 20px">Tambah user</button>
+<button data-title="Tambah Kategori" data-toggle="modal" data-target="#tambahData" class="btn btn-primary btn-sm pull-right center" style="margin-top: 20px">Tambah kategori</button>
 </div>
 <div class="clearfix"></div>
 
@@ -17,23 +17,19 @@
 		<thead>
 			<tr>
 				<th>Username</th>
-				<th>Nama</th>
-				<th>level</th>
 				<th>Edit</th>
 				<th>Delete</th>
 			</tr>
 		</thead>
 
 		<tbody>
-		<?php foreach ($user as $key => $value) { ?>
+		<?php foreach ($kategori as $key => $value) { ?>
 
 			<tr>
-				<td><?= $value->username ?></td>
-				<td><?= $value->nama ?></td>
-				<td><?= $value->level ?></td>
-
-				<td><button class="btn btn-primary btn-xs btn-edit" data-id="<?php echo $value->id ?>"   ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-				<td><button class="btn btn-delete btn-danger btn-xs" data-id="<?php echo $value->id ?>"  data-title="Delete" data-toggle="modal"  ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+				<td><?= $value->judul_kategori ?></td>
+			
+				<td><button class="btn btn-primary btn-xs btn-edit" data-id="<?php echo $value->id_kategori ?>"   ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+				<td><button class="btn btn-danger btn-xs btn-delete"  data-title="Delete" data-id="<?php echo $value->id_kategori ?>" data-toggle="modal" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
 			</tr>
 		<?php } ?> 
 
@@ -49,53 +45,18 @@
 		<form id="formTambahData" method="POST">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h4 class="modal-title custom_align" id="Heading">Tambah data</h4>
+				<h4 class="modal-title custom_align" id="Heading">Tambah data kategori</h4>
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<input class="form-control " type="text" placeholder="username" name="username" 		
-						data-validation="length alphanumeric" 
+					<input class="form-control " type="text" placeholder="masukan kategori" name="judul_kategori" 
+						data-validation="required" 
 		 				data-validation-length="3-12" 
 		 				data-validation-error-msg="User name hanya bisa di isi (angka,huruf) (3-12 karakter)">
 				</div>
-				<div class="form-group">
-					<input class="form-control " type="text" placeholder="nama" name="nama" 
-						data-validation="length" 
-		 				data-validation-length="3-12"
-		 				data-validation-error-msg="Gunakan nama yang valid">
-				</div>
-				<div class="form-group">
-
-					<input class="form-control " type="password" placeholder="masukan pasword" id="password1" 	  data-validation="length" 
-		 				data-validation-length="min3"
-		 				data-validation-error-msg="pasword harus di isi minimal 3 karakter">
-				</div>
-				<div class="form-group">
-
-					<input class="form-control " type="password" placeholder="masukan kembali password" id="password2" name="password" 
-						data-validation="length" 
-		 				data-validation-length="min3"
-		 				data-validation-error-msg="pasword harus di isi minimal 3 karakter">
-				</div>
-				<p style='color :green' id="valid">Password valid</p>
-				<p style='color :red' id="invalid">Password invalid</p>
-
-
-				<div class="form-group">
-
-					<select class="form-control" name="level" 
-						data-validation="required"
-		 				data-validation-error-msg="pilih salah satu pilihan"
-					>
-						<option hidden  default selected value="">level</option>
-						<option value="admin">admin</option>
-						<option value="member">member</option>
-					</select>
-
-				</div>
 			</div>
 			<div class="modal-footer ">
-				<button type="submit" class="btn btn-success btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Simpan</button>
+				<button type="submit" class="btn btn-success btn-sm" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Simpan</button>
 			</div>
 		</form>
 		</div>
@@ -142,7 +103,7 @@
     var input = $(this).serialize();
     $.ajax({
         method : 'POST',
-        url: '<?php echo base_url('user/act_save') ?>',
+        url: '<?php echo base_url('kategori/act_save') ?>',
         data: input
     })
     .done(function(msg) {
@@ -165,7 +126,7 @@
 
     $.ajax({
         method : 'POST',
-        url: '<?php echo base_url('user/act_edit') ?>',
+        url: '<?php echo base_url('kategori/act_edit') ?>',
         data: input
     })
     .done(function(msg) {
@@ -181,38 +142,12 @@
 
 });
 
-	
 
-	$(document).ready(function() {
-	$('#valid').hide();
-	$('#invalid').hide();
-
-  	$("#password2").keyup(validate_pass);
-});
-
-
-function validate_pass() {
-  var password1 = $("#password1").val();
-  var password2 = $("#password2").val();
- 
-    if(password1 == password2) {
-        $('#invalid').hide();
-
-        $('#valid').show();
-     
-    }
-    else {
-        $('#valid').hide();
-
-        $('#invalid').show();
-    }
-    
-}
 
 
 $(document).on("click", ".btn-edit", function() {
     var id = $(this).attr('data-id');
-    $.get("<?php echo base_url(); ?>user/edit/"+id, function(msg){
+    $.get("<?php echo base_url(); ?>kategori/edit/"+id, function(msg){
         // alert(msg);
         $('#m-update').html(msg);
         $('#editData').modal('show');
@@ -226,7 +161,7 @@ $(document).on("click", ".btn-delete", function(e) {
     	console.log(id);
     tes = $("#delete").modal('show').on("click","#btn-delete",function(e){
  
-        $.get("<?php echo base_url(); ?>user/hapus/"+id, function(){
+        $.get("<?php echo base_url(); ?>kategori/hapus/"+id, function(){
             $('#delete').modal('hide');
             window.location.reload();  
         });
@@ -236,7 +171,7 @@ $(document).on("click", ".btn-delete", function(e) {
 });
 
 $.validate({
-    modules : 'location, date, security, file',
+    modules : '',
     onModulesLoaded : function() {
       $('#country').suggestCountry();
       $('input[name="pass_confirmation"]').displayPasswordStrength();
@@ -244,7 +179,6 @@ $.validate({
     }
   });
 
-
   // Restrict presentation length
-  $('#presentation').restrictLength( $('#pres-max-length') );
+  // $('#presentation').restrictLength( $('#pres-max-length') );
 </script>    
