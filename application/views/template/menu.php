@@ -13,7 +13,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="<?= base_url('admin') ?>">Home</a></li>
             <li><a href="<?= base_url('issue') ?>">Issue</a></li>
-            <li><a href="#/contact">Aktifitas</a></li>
+            <li><a href="<?= base_url('aktifitas') ?>">Aktifitas</a></li>
             <?php if ($this->session->userdata('level') == 'admin') {?>
             <li class="dropdown">
               <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
