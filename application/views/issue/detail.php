@@ -16,6 +16,9 @@
 	$status   	= $data[0]->status;
 	$nama 		  = $data[0]->nama;
   $kategori   = $data[0]->judul_kategori;
+  $email      = $data[0]->email;
+
+
 
 	if ($status=='solved') {
 		$label = "<span class='label label-success'>Solved</span>";
@@ -27,7 +30,6 @@
  <div id="flash-messages">
   <?php echo  $this->session->flashdata('alert_msg'); ?>
 </div>
-
 
 <div>
 	<h3> <i class="glyphicon glyphicon-align-right"></i> <?= $judul ?></h3><?= $label ?>
@@ -133,7 +135,7 @@
         
 
       
-    	 <form class="form-horizontal" action="<?= base_url('issue/insert_comment') ?>" method="POST">
+    	 <form id="" class="form-horizontal" action="<?= base_url('issue/insert_comment') ?>" method="POST">
 		    <div class="form-group">
 		      <label for="isi" class="col-lg-2 control-label">Comment</label>
 		      <div class="col-lg-10">
@@ -143,6 +145,11 @@
 		    </div>
 
 		    <input type="hidden" name="issue_id" value="<?= $issue_id ?>">
+        <input type="hidden" name="judul" value="<?= $judul ?>">
+        <input type="hidden" name="email" value="<?= $email ?>">
+        <input type="hidden" name="username" value="<?= $username ?>">
+
+
 		    
 		    
 		    <div class="form-group">
@@ -245,6 +252,23 @@
         console.log(msg);
 
 
+    })
+    console.log('tes');
+    e.preventDefault();
+
+});
+
+  $(document).on("submit", "#form_insert_comment", function(e) {
+
+    var input = $(this).serialize();
+
+    $.ajax({
+        method : 'POST',
+        url: '<?php echo base_url('email/send_notif') ?>',
+        data: input
+    })
+    .done(function(msg) {
+        console.log(msg);
     })
     console.log('tes');
     e.preventDefault();

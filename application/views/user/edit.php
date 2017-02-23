@@ -21,6 +21,12 @@
 						<input class="form-control " type="text" placeholder="nama" name="nama" value="<?= $data[0]->nama ?>" data-validation="required"
 		 				data-validation-error-msg="tidak boleh kosong">
 					</div>
+					<div class="form-group">
+					<input class="form-control " type="email" placeholder="email" name="email" value="<?= $data[0]->email ?>" 
+						data-validation="email" 
+		 				data-validation-error-msg="Masukan alamat email">
+					</div>
+
 
 					<div class="form-group">
 
@@ -51,7 +57,7 @@
 
 <script type="text/javascript">
 	$.validate({
-    modules : 'location, date, security, file',
+    modules : '',
     onModulesLoaded : function() {
       $('#country').suggestCountry();
       $('input[name="pass_confirmation"]').displayPasswordStrength();

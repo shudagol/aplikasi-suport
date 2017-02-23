@@ -1,0 +1,7 @@
+- notif email waktu komentar
+- paginasi pencarian
+- sorting issue (berdasar tanggal, kategori)
+- edit issue
+- menu profil
+- username unik
+- flash data gagal login

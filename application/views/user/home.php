@@ -18,6 +18,7 @@
 			<tr>
 				<th>Username</th>
 				<th>Nama</th>
+				<th>Email</th>
 				<th>level</th>
 				<th>Edit</th>
 				<th>Delete</th>
@@ -30,6 +31,8 @@
 			<tr>
 				<td><?= $value->username ?></td>
 				<td><?= $value->nama ?></td>
+				<td><?= $value->email ?></td>
+
 				<td><?= $value->level ?></td>
 
 				<td><button class="btn btn-primary btn-xs btn-edit" data-id="<?php echo $value->id ?>"   ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
@@ -61,8 +64,13 @@
 				<div class="form-group">
 					<input class="form-control " type="text" placeholder="nama" name="nama" 
 						data-validation="length" 
-		 				data-validation-length="3-12"
+		 				data-validation-length="min3"
 		 				data-validation-error-msg="Gunakan nama yang valid">
+				</div>
+				<div class="form-group">
+					<input class="form-control " type="email" placeholder="email" name="email" 
+						data-validation="email" 
+		 				data-validation-error-msg="Masukan alamat email">
 				</div>
 				<div class="form-group">
 
@@ -236,7 +244,7 @@ $(document).on("click", ".btn-delete", function(e) {
 });
 
 $.validate({
-    modules : 'location, date, security, file',
+    modules : '',
     onModulesLoaded : function() {
       $('#country').suggestCountry();
       $('input[name="pass_confirmation"]').displayPasswordStrength();

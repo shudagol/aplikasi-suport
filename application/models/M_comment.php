@@ -10,7 +10,7 @@ class M_comment extends CI_Model {
   		$param['issue_id'] = $input['issue_id'];
   		$param['created_at'] = date("Y-m-d H:i:s");
   		$param['tgl'] = date("Y-m-d");
-		$this->db->insert('comment', $param);
+		  $this->db->insert('comment', $param);
 
 		return $this->db->affected_rows();
 	}
@@ -48,6 +48,9 @@ class M_comment extends CI_Model {
 		$this->db->delete('comment');
 		return $this->db->affected_rows();	
 	}
+
+
+ 
 
 }
 

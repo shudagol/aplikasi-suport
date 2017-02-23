@@ -111,8 +111,21 @@ class Issue extends CI_Controller {
 
       $input = $this->input->post();
       $id    = $this->input->post('issue_id');
+      $username_issue = $input['username'];
+      $username_comm = $this->session->userdata('username');
+      $alamat = $input['email'];
+      $judul = $input['judul'];
       $proses = $this->M_comment->act_tambah($input);
       if ($proses>= 0) {
+
+        $this->load->helper('email_helper');
+        if (mail_kirim($username_issue,$judul,$alamat,$username_comm)) {
+          echo 'berhasil';
+        }else{
+          echo 'gagal';
+        }
+      
+
         $this->session->set_flashdata('alert_msg',succ_msg('Komentar berhasil di tambahkan'));
         redirect('issue/detail/'.$id);
       }else{

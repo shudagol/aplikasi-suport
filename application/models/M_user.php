@@ -19,6 +19,7 @@ class M_user extends CI_Model {
   		$param['nama'] = $input['nama'];
   		$param['password'] = md5($input['password']);
   		$param['level'] = $input['level'];
+  		$param['email'] = $input['email'];
 		$this->db->insert('user', $param);
 
 		return $this->db->affected_rows();
@@ -29,6 +30,7 @@ class M_user extends CI_Model {
   		$param['nama'] = $input['nama'];
   		$param['level'] = $input['level'];
   		$param['id'] = $input['id'];
+  		$param['email'] = $input['email'];
 
 		$this->db->where('id', $input['id']);
 		$this->db->update('user', $param);
