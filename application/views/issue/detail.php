@@ -64,7 +64,7 @@
                   <?php if ($status=='open') {
                           if ($username==$this->session->userdata('username') | $this->session->userdata('username')=='admin' ) {
                     ?>
-                  <p class="text-right"><a href="#" class="btn btn-default btn-sm" data-title="solved" data-toggle="modal" data-target="#solved"><i class="fa fa-check-circle"></i> solved</a></p>
+                  <p class="text-right"><a href="<?= base_url('issue/edit_issue/'.$issue_id) ?>" class="btn btn-info btn-sm" title="edit"><span class='glyphicon glyphicon-pencil'></span></a>&nbsp&nbsp<a href="#" class="btn btn-success btn-sm" data-title="solved" data-toggle="modal" data-target="#solved"><i class="fa fa-check-circle"></i> solved</a></p>
                   <?php } }?>
                 </div>
               </div>
@@ -173,7 +173,7 @@
       </div>
       <div class="modal-body">
 
-        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Apakah issue ini sudah selesai ?</div>
+        <div class="alert alert-success"><span class="glyphicon glyphicon-warning-sign"></span> Apakah issue ini sudah selesai ?</div>
 
       </div>
       <div class="modal-footer ">

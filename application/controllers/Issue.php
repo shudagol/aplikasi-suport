@@ -26,7 +26,7 @@ class Issue extends CI_Controller {
  
   $config['base_url'] = base_url().'issue/index/';
   $config['total_rows'] = $jumlah; //menghitung total baris
-  $config['per_page'] = 5; //mengatur total data yang tampil per halamannya
+  $config['per_page'] = 10; //mengatur total data yang tampil per halamannya
   
  $config['full_tag_open'] = '<ul class="pagination pagination-sm pull-right">';
         $config['full_tag_close'] = '</ul>';
@@ -158,9 +158,6 @@ class Issue extends CI_Controller {
     public function update_comment()
     {
         $input = $this->input->post();
-       echo "<pre>";
-       print_r ($input);
-       echo "</pre>";
         $proses = $this->M_comment->update_comment($input);
 
         if ($proses>= 0) {
@@ -184,6 +181,29 @@ class Issue extends CI_Controller {
 
       }
     }
+
+    public function edit_issue($id)
+    {
+     $data['kategori'] = $this->M_issue->get_kategori();
+     $data['data'] = $this->M_issue->detail($id);
+
+     $this->template->lihat('issue/edit_issue',$data); 
+    }
+
+    public function act_edit_issue()
+    {
+      $input = $this->input->post();
+      $proses = $this->M_issue->act_edit_issue($input);
+        if ($proses>= 0) {
+          $this->session->set_flashdata('alert_msg',succ_msg('Issue Berhasil di Update'));
+          redirect('issue/detail/'.$input['issue_id']);
+        }else{
+          $this->session->set_flashdata('alert_msg',err_msg('Issue gagal di Update'));
+          redirect('issue/detail/'.$input['issue_id']);
+        }
+    }
+
+
 }
 
 /* End of file Admin.php */

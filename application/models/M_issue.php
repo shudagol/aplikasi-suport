@@ -80,4 +80,17 @@ class M_issue extends CI_Model {
     return $this->db->affected_rows();
   }
 
+   public function act_edit_issue($input){
+      $param['judul'] = $input['judul'];
+      $param['id_kategori'] = $input['kategori'];
+      $param['isi'] = $input['isi'];
+      $param['issue_id'] = $input['issue_id'];
+      $param['created_at'] = date("Y-m-d H:i:s");
+
+    $this->db->where('issue_id', $input['issue_id']);
+    $this->db->update('issue', $param);
+
+    return $this->db->affected_rows();
+  }
+
 }

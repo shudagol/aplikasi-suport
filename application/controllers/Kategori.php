@@ -42,9 +42,9 @@ class Kategori extends CI_Controller {
 		$input = $this->input->post();
 		$proses = $this->M_kategori->act_edit($input);
 		if ($proses>= 0) {
-			$this->session->set_flashdata('alert_msg',succ_msg('User Berhasil di Update'));
+			$this->session->set_flashdata('alert_msg',succ_msg('Kategori Berhasil di Update'));
 		}else{
-			$this->session->set_flashdata('alert_msg',err_msg('User gagal di Update'));
+			$this->session->set_flashdata('alert_msg',err_msg('Kategori gagal di Update'));
 		}
 	}
 
