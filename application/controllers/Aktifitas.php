@@ -19,9 +19,8 @@ class Aktifitas extends CI_Controller {
 	{
 		$data['post'] = $this->M_aktifitas->get_post();
 		$data['comment'] = $this->M_aktifitas->get_comment();
-		// echo "<pre>";
-		// print_r ($data);
-		// echo "</pre>";
+		
+
   		$this->template->lihat('aktifitas/home', $data);
 	}
 

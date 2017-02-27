@@ -34,6 +34,12 @@
           <div class="clearfix"></div>
           
             <ul class="list-group activity-list list" style="margin-top: 20px">
+            <li class="list-group-item" >
+              
+              <?php if (count($post)== 0) {
+                echo "tidak ada Aktifitas post issue";
+              } ?>
+            </li>
               <?php foreach ($post as $key => $value): ?>
                 
               <li class="list-group-item" id="post" >
@@ -66,6 +72,12 @@
 
 
         <ul class="list-group activity-list list" style="margin-top: 20px">
+           <li class="list-group-item" >
+              
+              <?php if (count($comment)== 0) {
+                echo "tidak ada Aktifitas post issue";
+              } ?>
+            </li>
           <?php foreach ($comment as $key => $value): ?>
             
             <li class="list-group-item">

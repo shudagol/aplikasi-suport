@@ -108,18 +108,24 @@ class Issue extends CI_Controller {
        }
 
   public function insert_comment(){
-
       $input = $this->input->post();
+      $isi = $this->input->post('isi');
       $id    = $this->input->post('issue_id');
+      $judul = $input['judul'];
+      $admin_user = $this->M_comment->get_admin($id);
+      $user_comment = $this->M_comment->get_user_comment($id);
+      $user_recepients = array_merge($admin_user,$user_comment);
+  
       $username_issue = $input['username'];
       $username_comm = $this->session->userdata('username');
-      $alamat = $input['email'];
-      $judul = $input['judul'];
+      $user_post = $input['email'];
+      
       $proses = $this->M_comment->act_tambah($input);
+
       if ($proses>= 0) {
 
         $this->load->helper('email_helper');
-        if (mail_kirim($username_issue,$judul,$alamat,$username_comm)) {
+        if (mail_kirim($username_issue,$judul,$user_post,$username_comm,$user_recepients,$isi)) {
           echo 'berhasil';
         }else{
           echo 'gagal';

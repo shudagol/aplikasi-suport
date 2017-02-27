@@ -49,8 +49,37 @@ class M_comment extends CI_Model {
 		return $this->db->affected_rows();	
 	}
 
+ public function get_admin($issue_id)
+  {
+    $sql = "select id as user_id,username,email from user where level='admin' and id not in (select user_id from comment where issue_id = $issue_id)";
+    $data = $this->db->query($sql);
+    return $data->result();
 
- 
+  }
+
+  public function get_user_comment($issue_id)
+  {
+    $this->db->select('comment.user_id,user.username,user.email');
+    $this->db->where('issue_id',$issue_id);
+    $this->db->where_not_in('comment.user_id', 1);
+    $this->db->join('user', 'user.id = comment.user_id', 'left');
+    $this->db->distinct();
+    $data = $this->db->get('comment'); 
+    return $data->result();
+  }
+
+//   public function get_user_comment($issue_id){
+//     $this->db->select('comment.user_id,user.username,user.email,comment.*');
+//     $this->db->from('comment');
+//     $this->db->join('user', 'user.id = comment.user_id', 'left');
+//     $this->db->where('issue_id',$issue_id);
+//     // $this->db->where('level','admin');
+
+//     $this->db->distinct();
+//     $data = $this->db->get(); 
+//     return $data->result();
+// }
+
 
 }
 

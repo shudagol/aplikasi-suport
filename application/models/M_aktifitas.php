@@ -22,11 +22,11 @@ class M_aktifitas extends CI_Model {
 		$id = $this->session->userdata('user_id');
 		$sql = "select comment.*,user.username,issue.judul
 				from comment
-				INNER JOIN user
-				ON comment.user_id=user.id
 				INNER JOIN issue
 				ON comment.issue_id=issue.issue_id
-				where comment.user_id=2
+				INNER JOIN user
+				ON issue.user_id=user.id
+				where comment.user_id=$id
 				ORDER BY comment.created_at DESC";
 		$data = $this->db->query($sql);
 	    return $data->result();
