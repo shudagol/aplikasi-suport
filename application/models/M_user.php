@@ -31,6 +31,7 @@ class M_user extends CI_Model {
   		$param['level'] = $input['level'];
   		$param['id'] = $input['id'];
   		$param['email'] = $input['email'];
+  		$param['img'] = $input['image'];
 
 		$this->db->where('id', $input['id']);
 		$this->db->update('user', $param);

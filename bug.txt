@@ -1,8 +1,7 @@
-- edit issue
 - menu profil
 - paginasi pencarian
 - sorting issue (berdasar tanggal, kategori)
 - username unik
 - flash data gagal login
-- notif email waktu komentar (user terkait)
+
 
