@@ -74,9 +74,8 @@ class Issue extends CI_Controller {
        $jumlah = count($data['issue']);
        
        if($data['issue']==null) {
-          print 'maaf data yang anda cari tidak ada atau keywordnya salah';
-          print br(2);
-          print anchor('welcome','kembali');
+          
+       $this->template->lihat('issue/home',$data);
           }
           else {
  			 $this->template->lihat('issue/home',$data);
