@@ -26,9 +26,9 @@
 					</div>
 				</div>
 				
-				<div class="external-links">
+				<!-- <div class="external-links">
 					<a href="#">Do you need something ?</a>
-				</div>
+				</div> -->
 				
 			</section>
 	</section>

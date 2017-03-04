@@ -1,4 +1,4 @@
-- menu profil
+- delete poto profil ketika update poto
 - paginasi pencarian
 - sorting issue (berdasar tanggal, kategori)
 - username unik
