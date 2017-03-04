@@ -16,7 +16,7 @@ class M_comment extends CI_Model {
 	}
 
 	public function get_comment($id){
-		$this->db->select('comment.*,user.username,user.nama');
+		$this->db->select('comment.*,user.username,user.nama,user.img');
 	    $this->db->where('issue_id', $id);
 	    $this->db->join('user', 'user.id = comment.user_id', 'left');
 	    $data = $this->db->get('comment');

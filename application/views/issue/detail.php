@@ -6,6 +6,7 @@
 </style>
 
 <?php 
+
 	$issue_id   = $data[0]->issue_id;
 	$judul      = $data[0]->judul;
 	$isi 	      = $data[0]->isi;
@@ -17,8 +18,8 @@
 	$nama 		  = $data[0]->nama;
   $kategori   = $data[0]->judul_kategori;
   $email      = $data[0]->email;
-
-
+  $image      = $data[0]->img;
+ 
 
 	if ($status=='solved') {
 		$label = "<span class='label label-success'>Solved</span>";
@@ -46,7 +47,11 @@
           <article class="row">
             <div class="col-md-2 col-sm-2 hidden-xs">
               <figure class="thumbnail">
+              <?php if ($image == null) { ?>
                 <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
+                <?php }else{ ?>
+                 <img class="img-responsive" src="<?= $image ?>"/>
+                 <?php } ?>
                 <figcaption class="text-center"><?= $username ?></figcaption>
               </figure>
             </div>
@@ -77,6 +82,10 @@
     <div class="col-md-10">
     	 <hr>
     	 <?php if ($comment != 0) {
+        // echo "<pre>";
+        // print_r ($comment);
+        // echo "</pre>";
+        // exit();
     	 	foreach ($comment as $key => $value) {?>
     	 		
     	 
@@ -84,7 +93,11 @@
           <article class="row">
             <div class="col-md-2 col-sm-2 col-md-offset-1 col-sm-offset-0 hidden-xs">
               <figure class="thumbnail">
+                 <?php if ($value->img == null) { ?>
                 <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
+                <?php }else{ ?>
+                 <img class="img-responsive" src="<?= $value->img ?>"/>
+                 <?php } ?>
                 <figcaption class="text-center"><?= $value->username; ?></figcaption>
               </figure>
             </div>

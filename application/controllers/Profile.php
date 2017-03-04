@@ -52,9 +52,9 @@ class Profile extends CI_Controller {
 
 		$config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size'] = '2000'; //in kb
-        $config['max_width']  = '1024';
-        $config['max_height']  = '768';
+        $config['max_size'] = '4000'; //in kb
+        $config['max_width']  = '4000';
+        $config['max_height']  = '4000';
         $this->upload->initialize($config);
         $this->upload->do_upload('image');
         $url = base_url('uploads/'.$this->upload->data('file_name'));

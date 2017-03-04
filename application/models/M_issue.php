@@ -64,7 +64,7 @@ class M_issue extends CI_Model {
 	}
 
   public function detail($id){
-    $this->db->select('issue.*, user.username,user.nama,user.email, kategori.judul_kategori');
+    $this->db->select('issue.*, user.username,user.nama,user.email,user.img, kategori.judul_kategori');
     $this->db->where('issue_id', $id);
     $this->db->join('user', 'user.id = issue.user_id', 'left');
     $this->db->join('kategori', 'kategori.id_kategori = issue.id_kategori', 'left');
