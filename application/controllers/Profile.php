@@ -26,7 +26,30 @@ class Profile extends CI_Controller {
 	}
 
 	function upload() {
-				
+        $cek = $this->M_user->edit($this->input->post('id'));
+      // echo "<pre>";
+      // print_r ($_FILES['image']['name']);
+      // echo "</pre>";
+      // exit();
+
+        if ($_FILES['image']['name'] == null) {
+           
+             $data_insert = array(
+                                'nama' => $this->input->post('nama'),
+                                'email' => $this->input->post('email'),
+                            );
+            //query to insert into myupload table
+            $this->db->where('id',$this->input->post('id'));
+            $proses = $this->db->update('user', $data_insert);
+            if ($proses>= 0) {
+                $this->session->set_flashdata('alert_msg',succ_msg('User Berhasil di Update'));
+                redirect('Profile','refresh');
+            }else{
+                $this->session->set_flashdata('alert_msg',err_msg('User gagal di Update'));
+                redirect('Profile','refresh');
+            }
+        }else{
+
 		$config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '2000'; //in kb
@@ -35,7 +58,7 @@ class Profile extends CI_Controller {
         $this->upload->initialize($config);
         $this->upload->do_upload('image');
         $url = base_url('uploads/'.$this->upload->data('file_name'));
-         $data_insert = array(
+        $data_insert = array(
                                 'nama' => $this->input->post('nama'),
                                 'email' => $this->input->post('email'),
                                 'img' => $url
@@ -49,8 +72,9 @@ class Profile extends CI_Controller {
             }else{
                 $this->session->set_flashdata('alert_msg',err_msg('User gagal di Update'));
                 redirect('Profile','refresh');
-
             }
+        }
+
         }
 
         

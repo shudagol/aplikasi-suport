@@ -7,7 +7,7 @@
       <div class="">
         <img src="<?= $user[0]->img ?>" class="avatar img-circle img-thumbnail" alt="photo" style="height: 200px;width: 200px">
         <h6>Upload a different photo...</h6>
-        <input type="file" name="image" class="well well-sm" value="<?= base_url('uploads/'.$user[0]->img) ?>">
+        <input type="file" name="image" class="well well-sm" value="">
       </div>
     </div>
     <!-- edit form column -->
