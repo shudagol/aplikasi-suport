@@ -93,4 +93,12 @@ class M_issue extends CI_Model {
     return $this->db->affected_rows();
   }
 
+   public function get_all_admin()
+  {
+    $this->db->select('email,username');
+    $this->db->where('level', 'admin');
+    $data = $this->db->get('user');
+    return $data->result();
+  }
+
 }

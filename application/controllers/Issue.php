@@ -89,9 +89,22 @@ class Issue extends CI_Controller {
 	}
 
 	public function insert(){
-      		$input = $this->input->post();
+          $admin_user = $this->M_issue->get_all_admin();
+          $input = $this->input->post();
+          $user_post = $this->session->userdata('username');
+          $judul = $input['judul'];
+          $isi   = $input['isi'];
+        
       		$proses = $this->M_issue->act_tambah($input);
       		if ($proses>= 0) {
+
+            $this->load->helper('emailpost_helper');
+            if (mailpost_kirim($judul,$admin_user,$isi,$user_post)) {
+              echo 'berhasil';
+            }else{
+              echo 'gagal';
+            }
+
       			$this->session->set_flashdata('alert_msg',succ_msg('Issue Berhasil di Inputkan'));
       			redirect('issue');
       		}else{
