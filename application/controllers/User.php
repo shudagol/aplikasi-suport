@@ -61,34 +61,6 @@ class User extends CI_Controller {
 		}
 	}
 
-	public function ubah_password($value='')
-	{
-  		$this->template->lihat('user/ubah_password');
-	}
-
-	public function act_password($value='')
-	{
-  		$input = $this->input->post();
-  		$lama = md5($input['passlama']);
-  		$baru = md5($input['password']);
-  		
-  		$username = $this->session->userdata('username');
-
-  		$cek = $this->M_user->cek_pass_lama($username,$lama);
-
-  		if ($cek[0]->password==$lama) {
-  			$proses = $this->M_user->update_pass($username,$baru);
-  			if ($proses) {
-  			$this->session->set_flashdata('alert_msg',succ_msg('Password telah diperbarui'));
-  			redirect('user/ubah_password','refresh');
-
-  			}
-  		}else{
-  			$this->session->set_flashdata('alert_msg',err_msg('Password lama tidak sesuai'));
-  			redirect('user/ubah_password','refresh');
-  		}
-  		
-	}
 
 
 }

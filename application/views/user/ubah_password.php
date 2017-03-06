@@ -9,7 +9,7 @@
 
 <hr>
 
-<form class="form-horizontal" action="<?= base_url('user/act_password') ?>" method="POST">
+<form class="form-horizontal" action="<?= base_url('ubah_pass/act_password') ?>" method="POST">
  <div class="col-md-6">	
     <div class="form-group">
       <label for="judul" class="col-lg-4 control-label">Password Lama</label>
