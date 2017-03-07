@@ -6,7 +6,10 @@
     <div class="col-md-12 col-sm-6 col-xs-12 ">
       <div class="">
         <img src="<?= $user[0]->img ?>" class="avatar img-circle img-thumbnail" alt="photo" style="height: 200px;width: 200px">
-        <h6>Upload a different photo...</h6>
+        <h6>Upload foto lain...</h6>
+        <h6>Rekomendasi photo adalah 400 x 400 pixels</h6>
+        <h6>Maksimal besar photo adalah 4mb</h6>
+
         <input type="file" name="image" class="well well-sm" value="">
       </div>
     </div>
