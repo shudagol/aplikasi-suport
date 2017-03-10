@@ -31,7 +31,7 @@ function mailpost_kirim($judul,$admin_user,$isi,$user_post)
 		}
 
 		$mail->Subject = "Notifikasi Aplikasi IT Suport CEP";
-		$mail->msgHTML('<h2><b>Sebuah issue bru saja ditambahkan</b></h2><p><b>'.$user_post.'</b> telah menambahkan issue baru <b>"'.$judul.'"</b> di Aplikasi Suport IT CEP</p><br><p>"'.$isi.'"</p>');
+		$mail->msgHTML('<h2><b>Sebuah issue baru saja ditambahkan</b></h2><p><b>'.$user_post.'</b> telah menambahkan issue baru <b>"'.$judul.'"</b> di Aplikasi Suport IT CEP</p><br><p>"'.$isi.'"</p>');
 		if (!$mail->send()) {
 		    return false;
 		} else {
