@@ -25,7 +25,7 @@
     <div class="form-group">
       <label for="judul" class="col-lg-4 control-label">Password Baru</label>
       <div class="col-lg-8">
-        <input type="Password" class="form-control" id="passbaru" name="passbaru" placeholder="masukan password lama" 
+        <input type="Password" class="form-control" id="passbaru" name="passbaru" placeholder="masukan password baru" 
         data-validation="length" 
 		data-validation-length="min3"
 		data-validation-error-msg="pasword harus di isi minimal 3 karakter">
